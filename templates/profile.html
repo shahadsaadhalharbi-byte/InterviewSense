@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character set and responsive design -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - InterviewSense</title>
+
+  <!-- Stylesheet link using Flask's url_for helper -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+
+  <!-- Google Fonts: Inter for body, Lato for brand name, Poppins for buttons -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Lato:wght@400;700;900&family=Poppins:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    .btn-primary:hover {
+      background: #3367D6;
+    }
+
+    /* User profile dropdown */
+    .user-profile {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .user-avatar {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      border-radius: 50%;
+    }
+
+    .user-avatar img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .dropdown-arrow {
+      margin-left: 5px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      min-width: 180px;
+      margin-top: 10px;
+      z-index: 100;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 15px;
+      text-decoration: none;
+      color: #333;
+      transition: background 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+    }
+
+    .show {
+      display: block;
+    }
+    
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .success-message {
+      color: green;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Main container for all content -->
+  <div class="container">
+    <!-- Header with logo and user menu -->
+    <header>
+      <!-- Logo with link to homepage -->
+      <div class="logo">
+        <a href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="InterviewSense Logo">
+          <div class="brand-name">
+            <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- User menu with avatar and dropdown -->
+      <!-- Authentication buttons -->
+      <div class="auth-buttons">
+        {% if 'user_id' in session %}
+        <!-- User profile with dropdown when logged in -->
+        <div class="user-profile">
+          <div class="user-avatar" onclick="toggleDropdown()">
+            <img src="{{ url_for('static', filename='img/user--2--1@2x.png') }}" alt="User Avatar">
+          </div>
+          <!-- Dropdown menu -->
+          <div id="profileDropdown" class="dropdown-menu">
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('get_started') }}">Start Interview</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+          </div>
+        </div>
+        {% else %}
+        <!-- Login/Signup buttons when not logged in -->
+        <a href="{{ url_for('login') }}" class="btn btn-outline">Login</a>
+        <a href="{{ url_for('signup') }}" class="btn btn-primary">Sign up</a>
+        {% endif %}
+      </div>
+    </header>
+
+    <!-- Main profile content area -->
+    <main class="profile-container">
+      <!-- Profile header with user info and edit button -->
+      <section class="profile-header">
+        <!-- User profile picture -->
+        <div class="user-profile-pic">
+
+        </div>
+
+        <!-- Edit profile button -->
+      </section>
+
+      <!-- Profile form section -->
+      <section class="profile-form">
+        <!-- Display success or error messages if any -->
+        {% if success %}
+        <div class="success-message">
+          {{ success }}
+        </div>
+        {% endif %}
+        
+        {% if error %}
+        <div class="error-message">
+          {{ error }}
+        </div>
+        {% endif %}
+        
+        <!-- Form for updating profile -->
+        <form action="{{ url_for('update_profile') }}" method="post">
+          <!-- Form row 1: Name and Language -->
+          <div class="form-row">
+            <!-- Name field -->
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your full name" value="{{ user.name if user }}">
+            </div>
+
+            <!-- Major dropdown -->
+            <div class="form-group">
+              <label for="major">Major</label>
+              <div class="select-wrapper">
+                <select id="major" name="major">
+                  <option value="" {% if not user.major %}selected{% endif %} disabled>Major</option>
+                  <option value="Computer Science" {% if user and user.major == 'Computer Science' %}selected{% endif %}>Computer Science</option>
+                  <option value="Computer Information Systems" {% if user and user.major == 'Computer Information Systems' %}selected{% endif %}>Computer Information Systems</option>
+                  <option value="Data Science" {% if user and user.major == 'Data Science' %}selected{% endif %}>Data Science</option>
+                  <option value="Artificial Intelligence" {% if user and user.major == 'Artificial Intelligence' %}selected{% endif %}>Artificial Intelligence</option>
+                  <option value="Cybersecurity" {% if user and user.major == 'Cybersecurity' %}selected{% endif %}>Cybersecurity</option>
+                </select>
+                <img class="select-arrow" src="{{ url_for('static', filename='img/vuesax-linear-arrow-down-3.svg') }}"
+                  alt="Arrow Down">
+              </div>
+            </div>
+          </div>
+          <br />
+          <!-- Form row 2: Email -->
+          <div class="form-row">
+            <!-- Email field (readonly, just for display) -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" value="{{ user.email if user }}" readonly>
+              <small>Email cannot be changed</small>
+            </div>
+          </div>
+
+          <!-- Password fields removed as requested -->
+           <br />
+
+          <!-- Form action buttons -->
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="{{ url_for('home') }}" class="btn btn-outline">Cancel</a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Select all FAQ items
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    // Add click event listeners to each FAQ item
+    faqItems.forEach(item => {
+      const toggleBtn = item.querySelector('.toggle-btn');
+      const answer = item.querySelector('.faq-answer');
+
+      // Initially hide all answers
+      answer.style.display = 'none';
+
+      // Toggle visibility when the button is clicked
+      toggleBtn.addEventListener('click', () => {
+        // Toggle the display of the answer
+        if (answer.style.display === 'none') {
+          answer.style.display = 'block';
+          toggleBtn.classList.add('active');
+        } else {
+          answer.style.display = 'none';
+          toggleBtn.classList.remove('active');
+        }
+      });
+    });
+
+    // Add this to your existing script or in a new script tag
+    function toggleDropdown() {
+      document.getElementById("profileDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown when clicking outside
+    window.onclick = function (event) {
+      if (!event.target.matches('.user-avatar') && !event.target.matches('.user-avatar *')) {
+        var dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+# Environment variables and secrets
+.env
+*.env
+
+# Local database and generated files
+database.db
+*.db
+*.sqlite3
+temp_audio.wav
+*.wav
+*.mp3
+*.mp4
+uploads/
+instance/
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Large generated model/cache files
+.cache/

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags for character set and responsive design -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Something Went Wrong - InterviewSense</title>
+
+  <!-- Stylesheet link using Flask's url_for helper -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/something-went-wrong.css') }}">
+
+  <!-- Google Fonts: Inter for body, Lato for brand name, Roboto for error messages -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Main container for all content -->
+  <div class="container">
+    <!-- Header with logo only -->
+    <header>
+      <div class="logo">
+        <a href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="InterviewSense Logo">
+          <div class="brand-name">
+            <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main content area for error page -->
+    <main class="error-container">
+      <div class="error-content">
+        <!-- Error message content - left column -->
+        <div class="error-message">
+          <!-- Error message headings -->
+          <h1>Oops....</h1>
+          <h2>Something went wrong</h2>
+          <p>Please check your internet connection</p>
+          
+          <!-- Action buttons -->
+          <div class="error-buttons">
+            <!-- Return to homepage button with icon -->
+            <a href="{{ url_for('home') }}" class="btn btn-primary">
+              <img src="{{ url_for('static', filename='img/icon-4.svg') }}" alt="Arrow Icon">
+              Go back to the homepage
+            </a>
+            
+            <!-- Contact us button -->
+
+          </div>
+        </div>
+        
+        <!-- Error illustration - right column -->
+        <div class="error-image">
+          <img src="{{ url_for('static', filename='img/laptop-01-1.svg') }}" alt="Error Illustration">
+
+        
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

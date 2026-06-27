@@ -1,0 +1,412 @@
+/* 
+  CSS Variables for consistent theming throughout the site
+  These define the color scheme and can be easily changed to update site appearance
+*/
+:root {
+  --primary-color: #2563EB;  /* Primary blue color used for highlights and accents */
+  --primary-dark: #1D4ED8;   /* Darker shade of primary blue for hover states */
+  --text-dark: #111827;      /* Main text color for headings and body text */
+  --text-light: #4B5563;     /* Secondary text color for less emphasis */
+  --text-muted: #6B7280;     /* Muted text color for tertiary information */
+  --white: #FFFFFF;          /* White color for backgrounds and contrast */
+  --light-gray: #F9FAFB;     /* Light gray for subtle backgrounds */
+  --border-light: #E5E7EB;   /* Light border color */
+  --light-blue: #e6f3f8;     /* Light blue for subtle backgrounds */
+  --btn-blue: #4182f9;       /* Blue variant for buttons */
+}
+
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main body styling */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Background curved shape using pseudo-element */
+body::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Main container that centers content and sets max width */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Header styles - contains logo and user menu */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* Logo container styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo link styling */
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Logo image size */
+.logo img {
+  height: 60px;
+  width: 60px;
+}
+
+/* Brand name text styling */
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin-left: 10px;
+}
+
+/* Two-tone brand name styling - "Interview" part */
+.brand-interview {
+  color: var(--text-dark);
+}
+
+/* Two-tone brand name styling - "Sense" part */
+.brand-sense {
+  color: var(--primary-color);
+}
+
+/* User menu in header - avatar and dropdown */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  
+}
+
+/* User avatar circle container */
+.user-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000003; /* Very subtle background */
+}
+
+/* User avatar image */
+.user-avatar img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+/* Dropdown arrow icon */
+.dropdown-arrow {
+  width: 7px;
+  height: 22px;
+  
+}
+
+/* Profile page main container */
+.profile-container {
+  padding: 40px 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  transform: translateY(-9%);
+}
+
+/* Profile header section with user info and edit button */
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+/* User profile picture container */
+.user-profile-pic {
+  margin-right: 20px;
+}
+.success-message{
+  position: absolute;
+  top: 95%;
+  left: 30; 
+}
+
+/* Avatar circle styling for profile page */
+.avatar-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Avatar image styling */
+.avatar-circle img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+/* User information container */
+.user-info {
+  flex: 1;
+}
+
+/* Welcome message with user name */
+.welcome-message {
+  font-size: 22.5px;
+  font-weight: 500;
+  color: #3E435D; /* Custom color for welcome message */
+  margin-bottom: 10px;
+}
+
+/* User email styling - smaller and semi-transparent */
+.user-email {
+  font-size: 0.875rem;
+  font-weight: 900;
+  opacity: 0.5;
+}
+
+/* Edit button styling */
+.edit-button {
+  background-color: var(--btn-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 7.5px;
+  padding: 8px 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Edit button hover effect */
+.edit-button:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Profile form styling */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-left: 30px; 
+  margin-top: 1px; 
+}
+
+/* Form row with two columns using grid */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  
+}
+
+
+
+/* Form labels styling */
+.form-group label {
+  font-weight: 600;
+  font-size: 1.125rem;
+  
+
+}
+
+/* Base styling for form input fields and select dropdowns */
+.form-group input,
+.form-group select {
+  height: 47px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  padding: 0 15px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  color: var(--text-dark);
+  background-color: var(--white);
+  width: 100%;
+  
+}
+
+
+/* Placeholder styling for input fields and dropdowns */
+.form-group input::placeholder,
+.form-group select::placeholder {
+  color: var(--text-light);
+  
+}
+
+/* Custom select dropdown wrapper for styling */
+.select-wrapper {
+  position: relative;
+}
+
+/* Hide default dropdown arrow and style the select */
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  
+}
+
+/* Custom dropdown arrow positioning */
+.select-arrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+}
+
+
+/* Form actions container - buttons row */
+.form-actions {
+  display: flex;
+  gap: 15px;
+  
+
+}
+
+
+/* Base button styling */
+.btn {
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+  text-align: center;
+  border: none;
+}
+
+/* Primary (filled) button styling */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+/* Primary button hover effect */
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Outline button styling */
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* Outline button hover effect */
+.btn-outline:hover {
+  background-color: var(--light-blue);
+}
+
+/* Responsive styles for tablets */
+@media (max-width: 992px) {
+  /* Stack form fields into single column */
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Responsive styles for smaller tablets and mobile */
+@media (max-width: 768px) {
+  /* Stack header elements vertically */
+  header {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Center align profile header elements */
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  /* Remove margin when elements are stacked */
+  .user-profile-pic {
+    margin-right: 0;
+  }
+  
+  /* Add spacing between user info and edit button */
+  .user-info {
+    margin-bottom: 15px;
+  }
+  
+  /* Stack form action buttons vertically */
+  .form-actions {
+    flex-direction: column;
+    width: 100%;
+    
+  }
+  
+  /* Full width buttons on mobile */
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media (max-width: 576px) {
+  /* Reduce welcome message size on small screens */
+  .welcome-message {
+    font-size: 1.5rem;
+
+  }
+  
+  /* Reduce label font size */
+  .form-group label {
+    font-size: 1rem;
+    
+  }
+  
+  /* Reduce input field height */
+  .form-group input,
+  .form-group select {
+    height: 40px;
+    
+  }
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags for character set and responsive design -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InterviewSense - Interview Preparation Platform</title>
+  
+  <!-- Stylesheet link using Flask's url_for helper -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home-page.css') }}">
+
+  <!-- Google Fonts: Inter for body text, Lato for brand name -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for icons (hamburger menu, close button) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Header with navigation bar -->
+  <header>
+    <div class="container">
+      <nav>
+        <!-- Logo and brand name -->
+        <div class="logo">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="InterviewSense Logo">
+          <div class="brand-name">
+            <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+          </div>
+        </div>
+        
+        <!-- Navigation links - with mobile menu functionality -->
+        <div class="nav-links" id="navLinks">
+          <!-- Close button for mobile menu -->
+          <i class="fas fa-times" onclick="hideMenu()"></i>
+          <!-- Main navigation items -->
+          <ul>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="{{ url_for('about') }}">About us</a></li> 
+            <li><a href="{{ url_for('faq') }}">F&Q</a></li>
+          </ul>
+        </div>
+        
+        <!-- Authentication buttons -->
+        <!-- Authentication buttons -->
+        <div class="auth-buttons">
+          {% if 'user_id' in session %}
+            <!-- Show when user is logged in -->
+            <a href="{{ url_for('profile') }}" class="btn btn-outline">Profile</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+          {% else %}
+            <!-- Show when user is not logged in -->
+            <a href="{{ url_for('login') }}" class="btn btn-outline">Login</a>
+            <a href="{{ url_for('signup') }}" class="btn btn-primary">Sign up</a>
+          {% endif %}
+        </div>
+        
+        <!-- Hamburger menu icon for mobile -->
+        <i class="fas fa-bars" onclick="showMenu()"></i>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero section - main banner with value proposition -->
+  <section class="hero">
+    <br />
+    <br />
+    <br />
+    <div class="container">
+      <div class="hero-content">
+        <!-- Hero text content -->
+        <div class="hero-text">
+          <h1>Are you feeling stressed and anxious about preparing for a live job interview?</h1>
+          <p>
+            InterviewSense is here to help! Our website combines advanced artificial intelligence with facial emotion
+            analysis to provide a unique interview training experience. It simulates real-world technical interviews,
+            allowing you to practice with tailored questions. You'll receive detailed feedback on both your responses
+            and facial expressions, helping you improve your performance and boost your confidence.
+          </p>
+          <!-- Call-to-action button -->
+          <a href="{{ url_for('get_started') }}" class="btn btn-primary btn-large">Get Started</a>
+        </div>
+        
+        <!-- Hero image -->
+        <div class="hero-image">
+          <img src="{{ url_for('static', filename='img/ai-text-gen.png') }}" alt="AI Interview Illustration">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works section - feature overview -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <!-- Section heading with decorative underline -->
+      <h2>How it works?</h2>
+      <div class="separator"></div>
+      
+      <!-- Features in 3-column layout -->
+      <div class="features">
+        <!-- Feature 1: Initial setup -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="{{ url_for('static', filename='img/form--1--1.png') }}" alt="Form Icon">
+          </div>
+          <h3>Fill out initial information</h3>
+          <p>Fill out information such as Name, Major, interview type.</p>
+        </div>
+        
+        <!-- Feature 2: Practice interviews -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="{{ url_for('static', filename='img/icon-1.svg') }}" alt="Practice Icon">
+          </div>
+          <h3>Practice interviews as many times as you want</h3>
+          <p>Practice multiple live iterations of your interview by speaking with our AI and receiving immediate feedback.</p>
+        </div>
+        
+        <!-- Feature 3: Privacy -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="{{ url_for('static', filename='img/image-3.png') }}" alt="Privacy Icon">
+          </div>
+          <h3>Data stays private</h3>
+          <p>The information you provide such as the job description, will remain private. We do not store any of this data on our servers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to action section with image -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <!-- CTA text -->
+        <div class="cta-text">
+          <h2>Start your first preparing interview now!</h2>
+        </div>
+        <!-- CTA image - platform preview -->
+        <div class="cta-image">
+          <img src="{{ url_for('static', filename='img/firstpreparing.png') }}" alt="Interview Platform Screenshot">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it's important section - benefits -->
+  <section class="why-important">
+    <div class="container">
+      <!-- Section heading and subtitle -->
+      <h2>Why it's important?</h2>
+      <p class="subtitle">The InterviewSense System is designed to enhance the interview preparation process for applicants</p>
+      
+      <!-- Benefits in 3-column layout with quote styling -->
+      <div class="benefits">
+        <!-- Benefit 1: Facial Emotion Analysis -->
+        <div class="benefit-card">
+          <div class="quote-marks">
+            <span>"</span>
+          </div>
+          <h3>Facial Emotion</h3>
+          <p>Analysis Improve your non-verbal communication by gaining insights from our facial emotion analysis.</p>
+          <div class="benefit-icon">
+          </div>
+          <div class="quote-marks end">
+            <span>"</span>
+          </div>
+        </div>
+        
+        <!-- Benefit 2: Advanced Technology -->
+        <div class="benefit-card">
+          <div class="quote-marks">
+            <span>"</span>
+          </div>
+          <h3>Advanced Technology</h3>
+          <p>Utilize advanced technology to prepare effectively with tailored questions that match your field.</p>
+          <div class="benefit-icon">
+          </div>
+          <div class="quote-marks end">
+            <span>"</span>
+          </div>
+        </div>
+        
+        <!-- Benefit 3: Comprehensive Preparation -->
+        <div class="benefit-card">
+          <div class="quote-marks">
+            <span>"</span>
+          </div>
+          <h3>Comprehensive Preparation</h3>
+          <p>Enhance your preparedness and confidence with a holistic strategy to ensure you're ready for interview success.</p>
+          <div class="benefit-icon">
+          </div>
+          <div class="quote-marks end">
+            <span>"</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Closing statement -->
+      <p class="closing-text">
+        Feeling unconfined in interviews is a common challenge for many applicants. Try the InterviewSense System now to boost your preparation and enhance your confidence.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer with contact information -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <!-- Contact information -->
+        <div class="contact-info">
+          <h3>Contacts</h3>
+          <p>Address: KSA, Medina</p>
+          <p>Email: InterviewSense0@gmail.com</p>
+        </div>
+        
+        <!-- Footer logo -->
+        <div class="footer-logo">
+          <img src="{{ url_for('static', filename='img/logo-dawn.png') }}" alt="InterviewSense Logo">
+          <div class="brand-name">
+            <span class="brand-interview1">Interview</span><span class="brand-sense1">Sense</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript for mobile menu functionality -->
+  <script>
+    // Show mobile menu function
+    function showMenu() {
+      document.getElementById("navLinks").style.right = "0";
+    }
+    
+    // Hide mobile menu function
+    function hideMenu() {
+      document.getElementById("navLinks").style.right = "-200px";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character set and responsive design -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - InterviewSense</title>
+
+  <!-- Stylesheet link using Flask's url_for helper -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sing-new.css') }}">
+
+  <!-- Google Fonts: Inter for body text, Lato for brand name, Poppins for login link -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700;900&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Main container for all content -->
+  <div class="container">
+    <!-- Header with logo and navigation link -->
+    <header>
+      <!-- Logo with link to homepage -->
+      <div class="logo">
+        <a href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="InterviewSense Logo">
+          <div class="brand-name">
+            <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation link back to home page -->
+      <div class="nav-links">
+        <a href="{{ url_for('home') }}" class="btn btn-outline">Home Page</a>
+      </div>
+    </header>
+
+
+    <!-- Main content area with sign-up form and illustration -->
+    <main class="signup-container">
+      <!-- Sign-up form - left column -->
+      <div class="signup-form">
+        <!-- Welcome text heading -->
+        <div class="welcome-text">
+          <h1>Get Started Now</h1>
+        </div>
+
+        <!-- Sign-up form with name, email and password fields -->
+        <form action="{{ url_for('signup') }}" method="post">
+          <!-- Name input field -->
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+          </div>
+
+          <!-- Email input field -->
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+          </div>
+
+          <!-- Password input field with visibility toggle -->
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-field">
+              <input type="password" id="password" name="password" placeholder="Enter your password" required>
+              <button type="button" class="toggle-password">
+                <img src="{{ url_for('static', filename='img/gridicons-visible-2.svg') }}" alt="Show Password">
+              </button>
+            </div>
+          </div>
+
+          <!-- Sign-up button -->
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+        {% if error %}
+        <div class="error-message" style="color: red; margin-top: 10px;">
+          {{ error }}
+        </div>
+        {% endif %}
+
+        <!-- Login link for existing users -->
+        <div class="login-link">
+          <p>Have an account? <a href="{{ url_for('login') }}">Login</a></p>
+        </div>
+      </div>
+
+      <!-- Sign-up illustration - right column -->
+      <div class="signup-image">
+        <img src="{{ url_for('static', filename='img/picture.png') }}" alt="Sign Up Illustration">
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript for password visibility toggle -->
+  <script>
+    // Toggle password visibility when the eye icon is clicked
+    document.querySelector('.toggle-password').addEventListener('click', function () {
+      const passwordField = document.getElementById('password');
+      // Switch between password and text types to show/hide the password
+      passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+    });
+  </script>
+</body>
+
+</html>

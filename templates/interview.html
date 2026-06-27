@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character set and responsive design -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Chat - InterviewSense</title>
+
+  <!-- External CSS stylesheet loaded using Flask's url_for -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/intreview.css') }}">
+
+  <!-- Google Fonts: Inter for body text -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="{{ url_for('static', filename='model/face-api.js/dist/face-api.min.js') }}"></script>
+
+
+  <!-- Internal CSS for chat interface components -->
+  <style>
+    /* Chat box container */
+    .chat-box {
+      max-width: 800px;
+      margin: 30px auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      background: #fff;
+      height: 600px;
+      overflow-y: auto;
+      /* Scrollable for long conversations */
+    }
+
+    /* Individual message styling */
+    .message {
+      margin-bottom: 20px;
+      padding: 10px 15px;
+      border-radius: 15px;
+      max-width: 150%;
+      display: inline-block;
+    }
+
+    /* Question message style - left aligned */
+    .question {
+      background-color: #f1f1f1;
+      text-align: left;
+    }
+
+    /* Answer message style - right aligned */
+    .answer {
+      background-color: #d1e7dd;
+      text-align: right;
+      float: right;
+    }
+
+    /* Controls container for navigation buttons */
+    .controls {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Button styling */
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Timer display styling */
+    .timer {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Progress bar container */
+    .progress-bar {
+      width: 100%;
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    /* Progress indicator */
+    .progress {
+      height: 10px;
+      background-color: green;
+      width: 0%;
+      /* Updated dynamically via JavaScript */
+    }
+
+    #face-warning {
+      position: fixed;
+      /* بدل absolute */
+      top: 10px;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      margin: 0 auto;
+      max-width: 90%;
+    }
+
+
+
+    /* Make sure the popup container is positioned relative */
+    .popup-container {
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Main popup container -->
+  <div class="popup-container">
+    <div class="popup-content">
+
+      <!-- Warning message for face detection - MOVED HERE -->
+      <p id="face-warning" style="
+      position: absolute;
+      top: 90%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+      color: red;
+      display: none;
+      text-align: center;
+      font-size: 16px;
+    ">
+        ⚠️ No face detected. Please position yourself in front of the camera.
+      </p>
+
+
+      <!-- Video Preview Section - Left side -->
+      <div class="video-section">
+        <!-- Close button linking to score page -->
+        <a href="{{ url_for('score_page') }}" class="close-button">
+          <div class="x">X</div>
+        </a>
+
+        <!-- Video feed container with user camera preview -->
+        <div class="video-feed">
+          <div class="user-camera">
+            <!-- Video element for webcam feed - Initially hidden for all cases -->
+            <video id="video" autoplay muted playsinline
+              style="width: 120%; height: 100%; object-fit: cover; border-radius: 10px; display: none;"></video>
+
+            <!-- Placeholder image - Only shown when camera is off -->
+            <img id="placeholder-img"
+              style="width: 80%; height: 100%; border-radius: 10px ; {% if camera_enabled %}display: none;{% endif %}"
+              src="{{ url_for('static', filename='img/profile4.png') }}" alt="User Placeholder">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Chat Interview Section - Right side -->
+      <div class="question-section">
+        <!-- Logo and branding -->
+        <div class="logo">
+          <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="Logo">
+          <div class="brand-name">
+            <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+          </div>
+        </div>
+
+        <!-- Progress bar for recording timer -->
+        <div class="progress-bar">
+          <div id="progress" class="progress"></div>
+        </div>
+
+        <!-- Chat box for Q&A display -->
+        <div class="chat-box" id="chat-box"></div>
+
+        <!-- Timer display for recording countdown -->
+        <p class="timer" id="timer"></p>
+
+        <!-- Navigation controls -->
+        <div class="controls">
+          <!-- <button id="back-btn" onclick="prevQuestion()">⬅️ Previous</button> -->
+          <button id="next-btn" onclick="nextQuestion()" disabled>➡️ Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for interview functionality -->
+  <script>
+    // Get questions and camera status from Flask template
+    const questions = {{ questions | tojson | safe }};
+    const cameraEnabled = {{ camera_enabled | tojson | safe }};
+    let currentIndex = 0;
+    let answers = Array(questions.length).fill("");
+    let faceDetectionInterval = null;
+
+    // Get DOM elements
+    const video = document.getElementById('video');
+    const placeholderImg = document.getElementById('placeholder-img');
+
+    /**
+     * Display the current question and answer (if available)
+     */
+    function displayCurrentQuestion() {
+      const chatBox = document.getElementById('chat-box');
+      chatBox.innerHTML = `<div class='message question'><strong>Question ${currentIndex + 1}:</strong> ${questions[currentIndex]}</div>`;
+
+      if (answers[currentIndex]) {
+        // If answer already exists, display it
+        chatBox.innerHTML += `<div class='message answer'>${answers[currentIndex]}</div>`;
+        document.getElementById('next-btn').disabled = false;
+      } else {
+        // Otherwise start recording for new answer
+        autoRecordAndTranscribe();
+      }
+    }
+
+    /**
+     * Automatically record audio and transcribe the answer
+     */
+    async function autoRecordAndTranscribe() {
+      const timerEl = document.getElementById('timer');
+      const progress = document.getElementById('progress');
+      const chatBox = document.getElementById('chat-box');
+      let seconds = 60; // Change to 60 seconds (1 minute)
+      const totalTime = 60; // Store total time for progress calculation
+
+      // Initialize timer display
+      timerEl.innerText = `🎙 Start answering... ${seconds}s`;
+      progress.style.width = '0%';
+
+      // Update timer every second
+      const interval = setInterval(() => {
+        seconds--;
+        // Prevent negative values
+        if (seconds <= 0) {
+          clearInterval(interval);
+          seconds = 0;
+        }
+        timerEl.innerText = `🎙 Start answering ... ${seconds}s`;
+        progress.style.width = `${(totalTime - seconds) * 100 / totalTime}%`;
+      }, 1000);
+
+      // Send recording request to backend
+      const response = await fetch('/record', { method: 'POST' });
+      clearInterval(interval); // Stop the timer when recording is complete
+      timerEl.innerText = '';
+      progress.style.width = '100%';
+
+      // Process the transcribed text
+      const data = await response.json();
+      if (data.success && data.text.trim() !== "") {
+        answers[currentIndex] = data.text;
+        chatBox.innerHTML += `<div class='message answer'>${data.text}</div>`;
+      } else {
+        answers[currentIndex] = "No answer provided";
+        chatBox.innerHTML += `<div class='message answer'>No answer provided</div>`;
+      }
+
+      // Enable next button after answer is recorded
+      document.getElementById('next-btn').disabled = false;
+    }
+
+    /**
+     * Navigate to the next question
+     */
+    function nextQuestion() {
+      if (currentIndex < questions.length - 1) {
+        currentIndex++;
+        document.getElementById('next-btn').disabled = true;
+        displayCurrentQuestion();
+      } else {
+        submitInterview();
+      }
+    }
+
+    function captureAndSendFrame() {
+      if (!cameraEnabled || !video.srcObject) {
+        console.log("Camera not enabled or video stream not available");
+        return;
+      }
+
+      try {
+        // Create a canvas element
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // Draw the current video frame to the canvas
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Get the image as base64 data URL
+        const imageData = canvas.toDataURL('image/jpeg');
+
+        // Send to server
+        fetch(`/analyze-frame?index=${currentIndex}`, {
+          method: 'POST',
+          body: imageData
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Check for error indicating camera is off
+            if (data.error && data.camera_status === "off") {
+              console.log("Camera is disabled in session");
+              stopFrameCapturing();
+              return;
+            }
+
+            console.log("Emotion detected:", data.emotion);
+
+            // If no face is detected, update the warning
+            if (!data.emotion) {
+              const faceWarning = document.getElementById('face-warning');
+              if (faceWarning) {
+                faceWarning.style.display = 'block';
+                faceWarning.textContent = '⚠️ No face detected. Please position yourself in front of the camera.';
+              }
+            }
+          })
+          .catch(err => {
+            console.error("Error sending frame:", err);
+          });
+      } catch (err) {
+        console.error("Error capturing frame:", err);
+      }
+    }
+    // Set up interval to send frames when camera is enabled
+    let frameCapturingInterval = null;
+
+    function startFrameCapturing() {
+      if (cameraEnabled && video.srcObject) {
+        // Send a frame every 2 seconds
+        frameCapturingInterval = setInterval(captureAndSendFrame, 20000);
+      }
+    }
+
+    function stopFrameCapturing() {
+      if (frameCapturingInterval) {
+        clearInterval(frameCapturingInterval);
+        frameCapturingInterval = null;
+      }
+    }
+
+    /**
+     * Navigate to the previous question
+     */
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        displayCurrentQuestion();
+        if (answers[currentIndex]) {
+          document.getElementById('next-btn').disabled = false;
+        }
+      }
+    }
+
+    /**
+     * Submit all answers to the backend and navigate to results
+     */
+    function submitInterview() {
+      document.getElementById('next-btn').disabled = true;
+
+      // Stop any ongoing frame capturing
+      stopFrameCapturing();
+
+      // If we have a face detection interval, clear it
+      if (faceDetectionInterval) {
+        clearInterval(faceDetectionInterval);
+        faceDetectionInterval = null;
+      }
+
+      fetch('/submit-interview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          answers: answers,
+          camera_used: cameraEnabled && video.srcObject !== null
+        })
+      }).then(() => {
+        window.location.href = '/score-page';
+      }).catch(() => {
+        alert("Something went wrong during submission.");
+        window.location.href = '/something-went-wrong';
+      });
+    }
+
+
+    async function startFaceDetection(videoElement) {
+      // If camera is not enabled, don't even try to start face detection
+      if (!cameraEnabled) {
+        console.log("Camera not enabled, skipping face detection");
+        return;
+      }
+
+      const faceWarning = document.getElementById('face-warning');
+
+      // Set up face detection with tiny face detector for better performance
+      const options = new faceapi.TinyFaceDetectorOptions({
+        inputSize: 224,
+        scoreThreshold: 0.5
+      });
+
+      // Clear any existing interval
+      if (faceDetectionInterval) {
+        clearInterval(faceDetectionInterval);
+      }
+
+      // Start detection interval
+      faceDetectionInterval = setInterval(async () => {
+        try {
+          // Check if video is still active
+          if (!videoElement.srcObject) {
+            console.log("Video stream ended");
+            if (faceWarning) faceWarning.style.display = 'none';
+            clearInterval(faceDetectionInterval);
+            return;
+          }
+
+          // Detect faces in the video stream
+          const detections = await faceapi.detectAllFaces(videoElement, options);
+
+          if (detections.length === 0) {
+            // No face detected - show warning
+            if (faceWarning) {
+              faceWarning.style.display = 'block';
+              faceWarning.textContent = '⚠️ No face detected. Please position yourself in front of the camera.';
+            }
+          } else {
+            // Face detected - hide warning
+            if (faceWarning) faceWarning.style.display = 'none';
+          }
+        } catch (err) {
+          console.error("Face detection error:", err);
+        }
+      }, 1000); // Check every second
+    }
+    /**
+     * Initialize the page when DOM is fully loaded
+     */
+    document.addEventListener('DOMContentLoaded', async () => {
+      displayCurrentQuestion();
+
+      // Initialize camera if enabled
+      if (cameraEnabled) {
+        try {
+          // Load face detection models from local files (fixed path)
+          await Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri('{{ url_for("static", filename="model") }}'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('{{ url_for("static", filename="model") }}')
+          ]);
+          console.log("Face detection models loaded successfully");
+
+          // Start video stream
+          navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+              // Set up video stream
+              video.srcObject = stream;
+
+              // Show video and hide placeholder when camera is enabled
+              video.style.display = 'block';
+              placeholderImg.style.display = 'none';
+
+              // Wait for video to be playing before starting face detection
+              video.addEventListener('playing', () => {
+                startFaceDetection(video);
+                startFrameCapturing(); // Start capturing frames for server-side analysis
+              });
+            })
+            .catch(err => {
+              console.warn("Camera error", err);
+              // If camera fails, hide video and show placeholder
+              video.style.display = 'none';
+              placeholderImg.style.display = 'block';
+            });
+        } catch (err) {
+          console.error("Error loading face detection models:", err);
+          // Try to start video even if models fail to load
+          navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+              video.srcObject = stream;
+              video.style.display = 'block';
+              placeholderImg.style.display = 'none';
+            })
+            .catch(err => {
+              console.warn("Camera error", err);
+              video.style.display = 'none';
+              placeholderImg.style.display = 'block';
+            });
+        }
+      } else {
+        // Camera is disabled - hide video and show placeholder
+        video.style.display = 'none';
+        placeholderImg.style.display = 'block';
+      }
+    });
+
+    // Clean up resources when page is unloaded
+    window.addEventListener('beforeunload', () => {
+      if (faceDetectionInterval) {
+        clearInterval(faceDetectionInterval);
+      }
+      stopFrameCapturing();
+    });
+  </script>
+</body>
+
+</html>

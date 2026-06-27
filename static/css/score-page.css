@@ -1,0 +1,487 @@
+:root {
+  --primary-color: #2563EB;
+  --primary-dark: #1D4ED8;
+  --text-dark: #111827;
+  --text-light: #4B5563;
+  --white: #FFFFFF;
+  --light-gray: #F9FAFB;
+  --border-light: #E5E7EB;
+  --light-blue: #e6f3f8;
+  --green: #28A745;
+  --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  background-image: url('../img/rectangle-above.png');
+  line-height: 1.5;
+  min-height: 100vh;
+
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* Header styles - contains logo only */
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 0;
+  
+}
+
+/* Logo container styling */
+.logo {
+  display: flex;
+  align-items: center;
+  margin-top: -10px;
+  margin-left: -190px; /* قلل القيمة حسب ما يناسبك */
+}
+
+/* Logo link styling */
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+}
+
+/* Logo image size */
+.logo img {
+  height: 60px;
+  width: 60px;
+  margin-top: -10px;
+
+}
+
+/* Brand name text styling */
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin-left: 20px; /* قلل القيمة حسب ما يناسبك */
+  margin-top: -10px;
+}
+
+/* Two-tone brand name styling - "Interview" part */
+.brand-interview {
+  color: var(--text-dark);
+}
+
+/* Two-tone brand name styling - "Sense" part */
+.brand-sense {
+  color: var(--primary-color);
+}
+
+/* Main container that centers content and sets max width */
+.container {
+  .container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* Logo container styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo link styling */
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Logo image size */
+.logo img {
+  height: 60px;
+  width: 60px;
+  transform: translateX(0%) translateY(-20px); 
+}
+
+/* Brand name text styling */
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  transform: translateX(0%) translateY(-20px); 
+}
+
+/* Two-tone brand name styling - "Interview" part */
+.brand-interview {
+  color: var(--text-dark);
+}
+
+/* Two-tone brand name styling - "Sense" part */
+.brand-sense {
+  color: var(--primary-color);
+}
+    /* Header layout */
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 15px 0;
+    }
+
+
+/* Navigation links */
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transform: translateX(20%) translateY(-60px); 
+  transition: transform 0.5s ease-in-out; 
+}
+
+/* Navigation link items */
+.nav-links ul li {
+  margin: 0 1rem;
+}
+
+
+.nav-links.active ul {
+  transform: translateX(0) translateY(0); 
+}
+
+    .nav-links li {
+      margin-right: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: color 0.3s;
+    
+    }
+
+    .nav-links a:hover {
+      color: #4285F4;
+    }
+    
+
+/* User profile container in header */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* User avatar container */
+.user-avatar {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  transform: translateX(290%) translateY(-10px); 
+}
+
+/* Circular avatar styling */
+.avatar-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+  background-color: rgba(0, 0, 0, 0.01);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Avatar image styling */
+.avatar-circle img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      min-width: 180px;
+      margin-top: 10px;
+      z-index: 50;
+      transform: translateX(130%) translateY(-10px); 
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 15px;
+      text-decoration: none;
+      color: #333;
+      transition: background 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+    }
+
+    .show {
+      display: block;
+    }
+/* Site title styling */
+.site-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* Results container styles */
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  transform: translateX(0%) translateY(-100px); 
+}
+
+.card {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  /*overflow: hidden;*/
+  margin-top: 70px;
+}
+
+.results-section {
+  padding: 30px;
+
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  margin-top: 20px; /* هذا يضيف مسافة من فوق */
+  gap: 40px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+.score-feedback {
+  font-weight: bold;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  margin-top: 20px; /* adds space from the top */
+  gap: 40px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+
+  /* New styles to make the box larger */
+  width: 100%; /* or use a specific value like 80% or 500px */
+  max-width: 1000px; /* optional limit to prevent it from getting too wide */
+  padding: 30px; /* adds space inside the box */
+  height: auto; /* allows height to adjust based on content */
+  margin-left: auto; /* centers the box horizontally */
+  margin-right: auto;
+}
+
+
+.AnswerText-grid {
+  font-weight: bold;
+  display: grid;
+  gap: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/* Paragraph inside the AnswerText-grid */
+.AnswerText-grid p {
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Expressions grid styles */
+.expressions-grid {
+  font-weight: bold;
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+
+.expression-item {
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  
+}
+.no-data-message {
+  text-align: center;
+  font-weight: bold;
+  color: rgb(0, 0, 0); /* لون النص */
+  margin-right: -430px;
+  font-size: 18px; /* حجم الخط */
+  font-weight: bold; /* جعل الخط عريض */
+  margin-top: 10px;
+}
+
+
+.score-value {
+  font-weight: bold;
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* Overall score styles */
+.overall-score {
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.overall-score p {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.no-data-message {
+  background-color:rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 25px; /* زدت المساحة الداخلية */
+  font-size: 16px; /* حجم الخط أكبر */
+  text-align: center;
+  margin-bottom: 20px;
+  width: 300%;
+}
+
+/* Button styles */
+.home-button {
+  background-color: var(--primary-color);
+  color: var(--white);
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20px;
+  display: inline-block;
+  width: auto;
+  min-width: 250px;
+}
+
+/* Home button hover effect */
+.home-button:hover {
+  background-color: var(--primary-dark);
+}
+/* Button base styling */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+/* Primary button style */
+.btn-primary {
+  background-color: #2E77E9; /* Slightly different blue than the variable */
+  color: var(--white);
+  border: none;
+}
+
+/* Primary button hover effect */
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Outline button style */
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--primary-color);
+  text-align: center;
+}
+
+/* Outline button hover effect */
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+/* Button icon styling */
+.btn img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .expressions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .results-section {
+    padding: 20px;
+  }
+  
+  .expressions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 15px;
+  }
+  
+  .home-button {
+    width: 100%;
+  }
+}

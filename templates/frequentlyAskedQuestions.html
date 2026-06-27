@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character set and responsive design -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frequently Asked Questions - InterviewSense</title>
+
+  <!-- Stylesheet link using Flask's url_for helper -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/frequentlyAskedQuestions.css') }}">
+
+  <!-- Google Fonts: Inter for body text, Lato for brand name -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700;900&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- Main container for all content -->
+  <div class="container">
+    <!-- Header with logo only -->
+    <!-- Header with logo and authentication options -->
+    <header>
+      <div class="header-container">
+        <!-- Logo with link to homepage -->
+        <div class="logo">
+          <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="InterviewSense Logo">
+            <div class="brand-name">
+              <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Navigation links - optional -->
+        <div class="nav-links">
+          <ul>
+            <li><a href="{{ url_for('home') }}#how-it-works">How it works</a></li>
+            <li><a href="{{ url_for('about') }}">About us</a></li> 
+            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Authentication buttons -->
+        <div class="auth-buttons">
+          {% if 'user_id' in session %}
+          <!-- User profile with dropdown when logged in -->
+              <div class="user-avatar">
+                <div class="user-avatar" onclick="toggleDropdown()">
+                  <div class="avatar-circle">
+                    <img src="{{ url_for('static', filename='img/user--2--1@2x.png') }}" alt="User Avatar">
+                  </div>
+            </div>
+            <!-- Dropdown menu -->
+            <div id="profileDropdown" class="dropdown-menu">
+              <a href="{{ url_for('profile') }}">Profile</a>
+              <a href="{{ url_for('get_started') }}">Start Interview</a>
+              <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+          </div>
+          {% else %}
+          <!-- Login/Signup buttons when not logged in -->
+          <a href="{{ url_for('login') }}" class="btn btn-outline">Login</a>
+          <a href="{{ url_for('signup') }}" class="btn btn-primary">Sign up</a>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+    <!-- Main content area with FAQ accordion -->
+    <main class="faq-container">
+      <!-- Page title -->
+      <h1 class="page-title">Frequently Asked Questions</h1>
+
+      <!-- FAQ accordion container -->
+      <div class="faq-accordion">
+        <!-- FAQ Item 1: What is InterviewSense? -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <h2>What is InterviewSense?</h2>
+            <button class="toggle-btn">
+              <img src="{{ url_for('static', filename='img/add-5.svg') }}" alt="Expand">
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>InterviewSense is an advanced AI-driven platform that helps candidates prepare for technical job
+              interviews. Our system combines interview simulations with facial emotion analysis to provide
+              comprehensive feedback on both your verbal responses and non-verbal cues.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2: Suitability for beginners -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <h2>Is Interview Sense suitable for beginners?</h2>
+            <button class="toggle-btn">
+              <img src="{{ url_for('static', filename='img/add-5.svg') }}" alt="Expand">
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely! InterviewSense is designed for candidates at all levels, from beginners to experienced
+              professionals. Our system adapts to your skill level and provides appropriate questions and feedback to
+              help you improve wherever you are in your career journey.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3: Pricing information -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <h2>What about pricing?</h2>
+            <button class="toggle-btn">
+              <img src="{{ url_for('static', filename='img/add-5.svg') }}" alt="Expand">
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>InterviewSense offers flexible pricing options to suit different needs. We have free features to get you
+              started, as well as premium subscription plans that provide access to advanced features. Visit our pricing
+              page for detailed information on our current plans and offers.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4: Getting started -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <h2>How do I get started with InterviewSense?</h2>
+            <button class="toggle-btn">
+              <img src="{{ url_for('static', filename='img/add-5.svg') }}" alt="Expand">
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>Getting started is easy! Simply create an account on our platform, fill in some basic information about
+              your field and the positions you're targeting, and you'll be ready to begin your first practice interview.
+              Our intuitive interface will guide you through the entire process.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5: Camera usage -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <h2>Can I use Interview Sense without turning on my camera?</h2>
+            <button class="toggle-btn">
+              <img src="{{ url_for('static', filename='img/add-5.svg') }}" alt="Expand">
+            </button>
+          </div>
+          <div class="faq-answer">
+            <p>While you can use InterviewSense without a camera, we highly recommend enabling video for the full
+              experience. Our facial emotion analysis provides valuable insights into your non-verbal communication,
+              which is a crucial aspect of successful interviewing. However, if you prefer, you can still practice with
+              just the verbal component.</p>
+          </div>
+        </div>
+        <!-- Extra spacing at the bottom of the page -->
+        <br /><br /><br />
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript for accordion functionality -->
+  <script>
+    // Select all FAQ items
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    // Add click event listeners to each FAQ item
+    faqItems.forEach(item => {
+      const toggleBtn = item.querySelector('.toggle-btn');
+      const answer = item.querySelector('.faq-answer');
+
+      // Initially hide all answers
+      answer.style.display = 'none';
+
+      // Toggle visibility when the button is clicked
+      toggleBtn.addEventListener('click', () => {
+        // Toggle the display of the answer
+        if (answer.style.display === 'none') {
+          answer.style.display = 'block';
+          toggleBtn.classList.add('active');
+        } else {
+          answer.style.display = 'none';
+          toggleBtn.classList.remove('active');
+        }
+      });
+    });
+
+    // Add this to your existing script or in a new script tag
+    function toggleDropdown() {
+      document.getElementById("profileDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown when clicking outside
+    window.onclick = function (event) {
+      if (!event.target.matches('.user-avatar') && !event.target.matches('.user-avatar *')) {
+        var dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+
+</body>
+
+</html>

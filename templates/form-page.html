@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character set and responsive design -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose Your Major - InterviewSense</title>
+
+  <!-- Stylesheet link using Flask's url_for helper -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/form-page.css') }}">
+
+  <!-- Google Fonts: Inter for body, Lato for brand name, Public Sans for form elements -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700;900&family=Public+Sans:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    /* Dropdown menu styles */
+    .user-profile {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: white;
+      min-width: 150px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+
+    .dropdown-menu a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+    }
+
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Main container for all content -->
+  <div class="container">
+    <!-- Header with logo and user profile -->
+    <header>
+      <!-- Logo with link to homepage -->
+      <div class="logo">
+        <a href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="InterviewSense Logo">
+          <div class="brand-name">
+            <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- User profile with avatar and dropdown -->
+      <div class="user-profile" onclick="toggleDropdown()">
+        <div class="user-avatar">
+          <div class="avatar-circle">
+            <img src="{{ url_for('static', filename='img/user--2--1@2x.png') }}" alt="User Avatar">
+          </div>
+        </div>
+
+        <!-- Dropdown menu -->
+        <div id="profileDropdown" class="dropdown-menu">
+          <a href="{{ url_for('profile') }}">Profile</a>
+          <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+      </div>
+    </header>
+
+
+
+    <!-- Main content area with form -->
+    <main class="form-container">
+      <!-- Centered brand logo and name -->
+      <div class="brand-centered">
+        <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="InterviewSense Logo">
+        <div class="brand-name">
+          <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+        </div>
+      </div>
+
+      <!-- Form content container -->
+      <div class="form-content">
+        <!-- Form title -->
+        <h2 class="form-title">Choose your Major</h2>
+
+        <!-- Form with hidden fields for submission -->
+        <form action="{{ url_for('inter_view') }}" method="POST" id="majorForm">
+          <!-- Hidden fields to store selected values on submission -->
+          <input type="hidden" name="major" id="selected-major">
+          <input type="hidden" name="camera" id="camera-status">
+          <input type="hidden" name="mic" id="mic-status">
+
+          <!-- Radio button group for major selection -->
+          <div class="radio-group">
+            <!-- Computer Science option -->
+            <div class="radio-option">
+              <input type="radio" id="cs" name="major" value="Computer Science" required>
+              <label for="cs">Computer Science</label>
+            </div>
+
+            <!-- Computer Information Systems option -->
+            <div class="radio-option">
+              <input type="radio" id="cis" name="major" value="Computer Information Systems">
+              <label for="cis">Computer Information Systems</label>
+            </div>
+
+            <!-- Data Science option -->
+            <div class="radio-option">
+              <input type="radio" id="ds" name="major" value="Data Science">
+              <label for="ds">Data Science</label>
+            </div>
+
+            <!-- Artificial Intelligence option -->
+            <div class="radio-option">
+              <input type="radio" id="ai" name="major" value="Artificial Intelligence">
+              <label for="ai">Artificial Intelligence</label>
+            </div>
+
+            <!-- Cybersecurity option -->
+            <div class="radio-option">
+              <input type="radio" id="cyber" name="major" value="Cybersecurity">
+              <label for="cyber">Cybersecurity</label>
+            </div>
+          </div>
+
+          <!-- Media controls for camera and microphone -->
+          <div class="media-controls">
+            <!-- Camera toggle switch -->
+            <div class="media-toggle">
+              <img src="{{ url_for('static', filename='img/video--4--1-1.png') }}" alt="Video Camera">
+              <label class="switch">
+                <input type="checkbox" id="camera-toggle">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Microphone toggle switch (checked by default) -->
+            <div class="media-toggle">
+              <img src="{{ url_for('static', filename='img/microphone--1--1-1.png') }}" alt="Microphone">
+              <label class="switch">
+                <input type="checkbox" id="mic-toggle" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Note about media requirements -->
+          <p class="media-note">Note: you should open the microphone to start the interview, but the camera is optional.
+          </p>
+
+          <!-- Submit button styled as an image -->
+          <button type="submit" class="start-button">
+            <img src="{{ url_for('static', filename='img/getstarted@2x.png') }}" alt="Get Started">
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Form validation and submission script -->
+  <script>
+    document.getElementById('majorForm').addEventListener('submit', function (event) {
+      // Check if a major is selected
+      const selectedMajor = document.querySelector('input[name="major"]:checked');
+      if (!selectedMajor) {
+        event.preventDefault();
+        alert('Please select your major to continue');
+        return;
+      }
+
+      // Check if microphone is enabled (required)
+      const micToggle = document.getElementById('mic-toggle');
+      if (!micToggle.checked) {
+        event.preventDefault();
+        alert('Error: Microphone is required to start the interview');
+        return;
+      }
+
+      // Set values for hidden fields before submission
+      document.getElementById('selected-major').value = selectedMajor.value;
+      document.getElementById('camera-status').value = document.getElementById('camera-toggle').checked ? 'on' : 'off';
+      document.getElementById('mic-status').value = micToggle.checked ? 'on' : 'off';
+    });
+  </script>
+  <!-- Add this script at the bottom of your body -->
+  <script>
+    // Toggle dropdown visibility
+    function toggleDropdown() {
+      document.getElementById("profileDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown when clicking outside of it
+    window.onclick = function (event) {
+      if (!event.target.matches('.user-profile') && !event.target.matches('.user-profile *')) {
+        var dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

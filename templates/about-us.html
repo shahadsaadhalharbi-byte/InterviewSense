@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - InterviewSense</title>
+
+  <!-- Flask CSS path -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about-us.css') }}">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <body>
+    <!-- Main container for all content -->
+    <div class="container">
+      <!-- Header with logo only -->
+      <!-- Header with logo and authentication options -->
+      <header>
+        <div class="header-container">
+          <!-- Logo with link to homepage -->
+          <div class="logo">
+            <a href="{{ url_for('home') }}">
+              <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="InterviewSense Logo">
+              <div class="brand-name">
+                <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+              </div>
+            </a>
+          </div>
+  
+          <!-- Navigation links - optional -->
+          <div class="nav-links">
+            <ul>
+              <li><a href="{{ url_for('home') }}#how-it-works">How it works</a></li>
+              <li><a href="{{ url_for('about') }}">About us</a></li> 
+              <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+            </ul>
+          </div>
+  
+          <!-- Authentication buttons -->
+          <div class="auth-buttons">
+            {% if 'user_id' in session %}
+            <!-- User profile with dropdown when logged in -->
+                <div class="user-avatar">
+                  <div class="user-avatar" onclick="toggleDropdown()">
+                    <div class="avatar-circle">
+                      <img src="{{ url_for('static', filename='img/user--2--1@2x.png') }}" alt="User Avatar">
+                    </div>
+              </div>
+              <!-- Dropdown menu -->
+              <div id="profileDropdown" class="dropdown-menu">
+                <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('get_started') }}">Start Interview</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+              </div>
+            </div>
+            {% else %}
+            <!-- Login/Signup buttons when not logged in -->
+            <a href="{{ url_for('login') }}" class="btn btn-outline">Login</a>
+            <a href="{{ url_for('signup') }}" class="btn btn-primary">Sign up</a>
+            {% endif %}
+          </div>
+        </div>
+      </header>
+
+    <main class="about-container">
+      <div class="about-content">
+        <div class="section-title">
+          <h1>About us</h1>
+          <div class="title-underline"></div>
+        </div>
+        
+        <div class="about-text">
+          <p class="intro">Welcome to InterviewSense</p>
+          
+          <p>At Interview Sense, we are redefining the way you prepare for technical job interviews. Our website offers an advanced, AI-driven solution that blends interview simulations with facial emotion analysis to provide a truly immersive practice experience. We help you identify and improve both the content of your answers and the non-verbal cues that can make or break an interview.</p>
+          
+          <h2>Our Mission</h2>
+          
+          <p>Our mission is to bridge the gap between traditional interview practice and the real-life experience of a high-stakes technical interview. We want to empower candidates with the tools they need to showcase their skills confidently, helping them land their dream jobs in the competitive tech industry.</p>
+          
+          <h2>Join Us</h2>
+          
+          <p>Ready to take your interview preparation to the next level? Sign up today and experience the power of AI-driven training. With Interview Sense, every practice session brings you one step closer to your dream job.</p>
+          
+          <p class="cta">Start Your Journey with InterviewSense Today!</p>
+        </div>
+      </div>
+      
+      <div class="brand-display">
+        <div class="brand-logo">
+          <img src="{{ url_for('static', filename='img/untitled--tag--us---removebg-preview-2@2x.png') }}" alt="InterviewSense Logo">
+        </div>
+        <h2 class="brand-title">
+          <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+        </h2>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    function toggleDropdown() {
+      document.getElementById("profileDropdown").classList.toggle("show");
+    }
+  
+    window.onclick = function (event) {
+      if (!event.target.matches('.user-avatar') && !event.target.matches('.user-avatar *')) {
+        var dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+  
+</body>
+</html>

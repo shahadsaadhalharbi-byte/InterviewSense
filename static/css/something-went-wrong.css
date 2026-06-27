@@ -1,0 +1,286 @@
+/* 
+  CSS Variables for consistent theming throughout the site
+  These define the color scheme and can be easily changed to update site appearance
+*/
+:root {
+  --primary-color: #2563EB;  /* Primary blue color used for highlights and accents */
+  --primary-dark: #1D4ED8;   /* Darker shade of primary blue for hover states */
+  --text-dark: #111827;      /* Main text color for headings and body text */
+  --text-light: #4B5563;     /* Secondary text color for less emphasis */
+  --white: #FFFFFF;          /* White color for backgrounds and contrast */
+  --light-gray: #F9FAFB;     /* Light gray for subtle backgrounds */
+  --border-light: #E5E7EB;   /* Light border color */
+  --light-blue: #e6f3f8;     /* Light blue for subtle backgrounds */
+}
+
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main body styling */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Background curved shape using pseudo-element */
+body::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Main container that centers content and sets max width */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Header styles - contains logo only */
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* Logo container styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo link styling */
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Logo image size */
+.logo img {
+  height: 60px;
+  width: 60px;
+}
+
+/* Brand name text styling */
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin-left: 10px;
+}
+
+/* Two-tone brand name styling - "Interview" part */
+.brand-interview {
+  color: var(--text-dark);
+}
+
+/* Two-tone brand name styling - "Sense" part */
+.brand-sense {
+  color: var(--primary-color);
+}
+
+/* Main content area for error page */
+.error-container {
+  padding: 60px 0;
+  min-height: calc(100vh - 150px); /* Full viewport height minus header */
+  display: flex;
+  align-items: center;
+}
+
+/* Content layout with two columns */
+.error-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+}
+
+/* Error message container - left column */
+.error-message {
+  flex: 1;
+  max-width: 500px;
+}
+
+/* Main error heading */
+.error-message h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Secondary error heading */
+.error-message h2 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+/* Error message text */
+.error-message p {
+  font-size: 1rem;
+  color: #4B4B4B;
+  margin-bottom: 30px;
+  letter-spacing: 0.64px;
+}
+
+/* Container for action buttons */
+.error-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Button base styling */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+/* Primary button style */
+.btn-primary {
+  background-color: #2E77E9; /* Slightly different blue than the variable */
+  color: var(--white);
+  border: none;
+}
+
+/* Primary button hover effect */
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Outline button style */
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--primary-color);
+  text-align: center;
+}
+
+/* Outline button hover effect */
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+/* Button icon styling */
+.btn img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+/* Error illustration container - right column */
+.error-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Error illustration image */
+.error-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive styles for tablets */
+@media (max-width: 992px) {
+  /* Reverse column order and center content on smaller screens */
+  .error-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  
+  /* Full width error message on smaller screens */
+  .error-message {
+    max-width: 100%;
+  }
+  
+  /* Center buttons on smaller screens */
+  .error-buttons {
+    justify-content: center;
+  }
+  
+  /* Reduce image size on smaller screens */
+  .error-image img {
+    max-width: 80%;
+  }
+}
+
+/* Responsive styles for smaller tablets */
+@media (max-width: 768px) {
+  /* Reduce heading sizes */
+  .error-message h1 {
+    font-size: 2rem;
+  }
+  
+  .error-message h2 {
+    font-size: 1.5rem;
+  }
+  
+  /* Reduce button size */
+  .btn {
+    min-width: 180px;
+    padding: 10px 20px;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media (max-width: 576px) {
+  /* Reduce vertical spacing */
+  .error-container {
+    padding: 40px 0;
+  }
+  
+  /* Further reduce heading sizes */
+  .error-message h1 {
+    font-size: 1.8rem;
+  }
+  
+  .error-message h2 {
+    font-size: 1.3rem;
+  }
+  
+  /* Stack buttons vertically on mobile */
+  .error-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Full width buttons on mobile */
+  .btn {
+    width: 100%;
+  }
+}

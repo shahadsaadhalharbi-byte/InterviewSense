@@ -1,0 +1,380 @@
+/* 
+  CSS Variables for consistent theming throughout the site
+  These define the color scheme and can be easily changed to update site appearance
+*/
+:root {
+  --primary-color: #2563EB;  /* Primary blue color used for highlights and accents */
+  --primary-dark: #1D4ED8;   /* Darker shade of primary blue for hover states */
+  --text-dark: #111827;      /* Main text color for headings and body text */
+  --text-light: #4B5563;     /* Secondary text color for less emphasis */
+  --white: #FFFFFF;          /* White color for backgrounds and contrast */
+  --light-gray: #F9FAFB;     /* Light gray for subtle backgrounds */
+  --border-light: #E5E7EB;   /* Light border color */
+  --light-blue: #e6f3f8;     /* Light blue for subtle backgrounds */
+  --card-shadow: 0px 0px 20px rgba(84, 147, 221, 0.25); /* Shadow for card elements */
+}
+
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main body styling */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Background curved shape using pseudo-element */
+body::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Main container that centers content and sets max width */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Header styles - contains logo only */
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* Logo container styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo link styling */
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Logo image size */
+.logo img {
+  height: 60px;
+  width: 60px;
+}
+
+/* Brand name text styling */
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin-left: 10px;
+}
+
+/* Two-tone brand name styling - "Interview" part */
+.brand-interview {
+  color: var(--text-dark);
+}
+
+/* Two-tone brand name styling - "Sense" part */
+.brand-sense {
+  color: var(--primary-color);
+}
+    /* Header layout */
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 15px 0;
+    }
+
+
+/* Navigation links */
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transform: translateX(75%) translateY(5px); 
+  transition: transform 0.5s ease-in-out; 
+}
+
+/* Navigation link items */
+.nav-links ul li {
+  margin: 0 1rem;
+}
+
+
+.nav-links.active ul {
+  transform: translateX(0) translateY(0); 
+}
+
+    .nav-links li {
+      margin-right: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: color 0.3s;
+    
+    }
+
+    .nav-links a:hover {
+      color: #4285F4;
+    }
+
+    /* Authentication buttons */
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 10px;
+      transition: all 0.3s;
+    }
+
+    .btn-outline {
+      border: 1px solid #4285F4;
+      color: #4285F4;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: rgba(66, 133, 244, 0.1);
+    }
+
+    .btn-primary {
+      background: #4285F4;
+      color: white;
+      border: 1px solid #4285F4;
+    }
+
+    .btn-primary:hover {
+      background: #3367D6;
+    }
+
+
+
+/* User profile container in header */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* User avatar container */
+.user-avatar {
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+/* Circular avatar styling */
+.avatar-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+  background-color: rgba(0, 0, 0, 0.01);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Avatar image styling */
+.avatar-circle img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      min-width: 180px;
+      margin-top: 10px;
+      z-index: 100;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 15px;
+      text-decoration: none;
+      color: #333;
+      transition: background 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+    }
+
+    .show {
+      display: block;
+    }
+
+/* Main content - FAQ section */
+.faq-container {
+  padding: 40px 0 80px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Page title styling */
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: var(--text-dark);
+}
+
+/* Accordion container styling */
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual FAQ item card styling */
+.faq-item {
+  background-color: var(--white);
+  border-radius: 15px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+/* FAQ question row styling */
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  cursor: pointer;
+}
+
+/* FAQ question heading styling */
+.faq-question h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Toggle button styling for accordion */
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+/* Toggle button icon styling */
+.toggle-btn img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Active state for toggle button (rotated plus icon) */
+.toggle-btn.active {
+  transform: rotate(45deg);
+}
+
+/* FAQ answer content styling */
+.faq-answer {
+  padding: 0 30px 20px;
+  color: var(--text-light);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Responsive styles for tablets */
+@media (max-width: 768px) {
+  /* Reduce title size */
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  /* Reduce padding on question row */
+  .faq-question {
+    padding: 15px 20px;
+  }
+  
+  /* Reduce question text size */
+  .faq-question h2 {
+    font-size: 1.2rem;
+  }
+  
+  /* Reduce answer padding and font size */
+  .faq-answer {
+    padding: 0 20px 15px;
+    font-size: 1rem;
+  }
+  
+  /* Reduce toggle button size */
+  .toggle-btn {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media (max-width: 576px) {
+  /* Further reduce title size */
+  .page-title {
+    font-size: 1.8rem;
+  }
+  
+  /* Further reduce question text size */
+  .faq-question h2 {
+    font-size: 1.1rem;
+  }
+  
+  /* Minimum size for toggle button */
+  .toggle-btn {
+    width: 24px;
+    height: 24px;
+  }
+}

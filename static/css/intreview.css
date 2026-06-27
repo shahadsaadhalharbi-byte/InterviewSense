@@ -1,0 +1,276 @@
+/* 
+  CSS Variables for consistent theming throughout the site
+  These define the color scheme and can be easily changed to update site appearance
+*/
+:root {
+  --primary-color: #2563EB;  /* Primary blue color used for highlights and accents */
+  --primary-dark: #1D4ED8;   /* Darker shade of primary blue for hover states */
+  --text-dark: #111827;      /* Main text color for headings and body text */
+  --text-light: #4B5563;     /* Secondary text color for less emphasis */
+  --white: #FFFFFF;          /* White color for backgrounds and contrast */
+  --light-gray: #F9FAFB;     /* Light gray for subtle backgrounds */
+  --border-light: #E5E7EB;   /* Light border color */
+  --light-blue: #F2FAFA;     /* Light blue for interview background */
+  --close-red: #CC5F53;      /* Red color for close button */
+}
+
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main body styling - centered full-screen layout */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  line-height: 1.5;
+  background-image: url('../img/rectangle-above.png');
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+/* Main container for pop-up window */
+.popup-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+/* Content area with two-column layout */
+.popup-content {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Video section styles - left column */
+.video-section {
+  flex: 1;
+  max-width: 700px;
+  position: relative;
+  border: 2px solid rgba(0, 0, 0, 0.38);
+  border-radius: 8px;
+  overflow: hidden;
+  background-image: url(../img/displayname-off--actions-off@2x.png);
+  background-position: center;
+  background-size: cover;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+/* Close button styling */
+.close-button {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 28px;
+  height: 28px;
+  background-color: var(--close-red);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* X symbol in close button */
+.x {
+  font-family: 'Abel', sans-serif;
+  font-size: 14px;
+  color: var(--white);
+  line-height: 1;
+}
+
+/* Video feed container */
+.video-feed {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  background-image: url('../img/user-interview.png');
+  background-size: cover;
+}
+
+/* User camera preview container */
+.user-camera {
+  width: 190px;
+  height: 130px;
+  background-color: rgba(7, 7, 7, 0.1);
+  backdrop-filter: blur(2.77px);
+  border: 1px solid rgba(0, 0, 0, 0.44);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* User camera image styling */
+.user-camera img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+}
+
+/* Question section styles - right column */
+.question-section {
+  flex: 0 0 370px;
+  height: 530px;
+  background-color: var(--light-blue);
+  border: 1px solid rgba(9, 9, 9, 0.44);
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo container styling */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo image sizing */
+.logo img {
+  width: 80px;
+  height: 80px;
+}
+
+/* Brand name styling */
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+/* Two-tone brand name styling - "Interview" part */
+.brand-interview {
+  color: var(--text-dark);
+}
+
+/* Two-tone brand name styling - "Sense" part */
+.brand-sense {
+  color: var(--primary-color);
+}
+
+/* Question content container */
+.question-content {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* Question text styling */
+.question-content p {
+  font-family: 'Inria Serif', serif;
+  font-size: 22px;
+  color: rgba(0, 0, 0, 0.53);
+  line-height: 1.4;
+}
+
+
+/* Responsive styles for tablets and smaller screens */
+@media (max-width: 1200px) {
+  /* Stack columns vertically on smaller screens */
+  .popup-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Full width video section */
+  .video-section {
+    width: 100%;
+    max-width: 650px;
+  }
+  
+  /* Full width question section */
+  .question-section {
+    width: 100%;
+    max-width: 650px;
+  }
+}
+
+/* Responsive styles for smaller tablets */
+@media (max-width: 768px) {
+  /* Reduce video height */
+  .video-section {
+    height: 400px;
+  }
+  
+  /* Smaller user camera preview */
+  .user-camera {
+    width: 150px;
+    height: 100px;
+  }
+  
+  /* Smaller user camera image */
+  .user-camera img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  /* Smaller question text */
+  .question-content p {
+    font-size: 18px;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media (max-width: 576px) {
+  /* Reduced padding for mobile */
+  .popup-container {
+    padding: 10px;
+  }
+  
+  /* Further reduce video height */
+  .video-section {
+    height: 300px;
+  }
+  
+  /* Reduced padding for question section */
+  .question-section {
+    padding: 20px;
+  }
+  
+  /* Smaller logo */
+  .logo img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  /* Smaller brand name */
+  .brand-name {
+    font-size: 1.2rem;
+  }
+  
+  /* Minimum size user camera */
+  .user-camera {
+    width: 120px;
+    height: 80px;
+  }
+  
+  /* Minimum size user camera image */
+  .user-camera img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  /* Minimum font size for question */
+  .question-content p {
+    font-size: 16px;
+  }
+}

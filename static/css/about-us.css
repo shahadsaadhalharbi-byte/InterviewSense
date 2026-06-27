@@ -1,0 +1,423 @@
+/* 
+  CSS Variables for consistent theming throughout the site
+  These define the color scheme and can be easily changed to update site appearance
+*/
+:root {
+  --primary-color: #2563EB;  /* Primary blue color used for highlights and accents */
+  --primary-dark: #1D4ED8;   /* Darker shade of primary blue for hover states */
+  --text-dark: #111827;      /* Main text color for headings and body text */
+  --text-light: #4B5563;     /* Secondary text color for less emphasis */
+  --white: #FFFFFF;          /* White color for backgrounds and contrast */
+  --light-gray: #F9FAFB;     /* Light gray for subtle backgrounds */
+  --border-light: #E5E7EB;   /* Light border color */
+}
+
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main body styling */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Main container that centers content and sets max width */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Header styles - contains logo only */
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* Logo container styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo link styling */
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Logo image size */
+.logo img {
+  height: 60px;
+  width: 60px;
+}
+
+/* Brand name text styling */
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin-left: 10px;
+}
+
+/* Two-tone brand name styling - "Interview" part */
+.brand-interview {
+  color: var(--text-dark);
+}
+
+/* Two-tone brand name styling - "Sense" part */
+.brand-sense {
+  color: var(--primary-color);
+}
+    /* Header layout */
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 15px 0;
+    }
+
+
+/* Navigation links */
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transform: translateX(75%) translateY(5px); 
+  transition: transform 0.5s ease-in-out; 
+}
+
+/* Navigation link items */
+.nav-links ul li {
+  margin: 0 1rem;
+}
+
+
+.nav-links.active ul {
+  transform: translateX(0) translateY(0); 
+}
+
+    .nav-links li {
+      margin-right: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: color 0.3s;
+    
+    }
+
+    .nav-links a:hover {
+      color: #4285F4;
+    }
+
+    /* Authentication buttons */
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 10px;
+      transition: all 0.3s;
+    }
+
+    .btn-outline {
+      border: 1px solid #4285F4;
+      color: #4285F4;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: rgba(66, 133, 244, 0.1);
+    }
+
+    .btn-primary {
+      background: #4285F4;
+      color: white;
+      border: 1px solid #4285F4;
+    }
+
+    .btn-primary:hover {
+      background: #3367D6;
+    }
+
+
+
+/* User profile container in header */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* User avatar container */
+.user-avatar {
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+/* Circular avatar styling */
+.avatar-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+  background-color: rgba(0, 0, 0, 0.01);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  
+}
+
+/* Avatar image styling */
+.avatar-circle img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      min-width: 180px;
+      margin-top: 10px;
+      z-index: 100;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 15px;
+      text-decoration: none;
+      color: #333;
+      transition: background 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+    }
+
+    .show {
+      display: block;
+    }
+
+
+/* Main content container - flexbox layout */
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 40px 0 80px;
+}
+
+/* Left side content area */
+.about-content {
+  flex: 2;
+  max-width: 750px;
+}
+
+/* Section title container */
+.section-title {
+  margin-bottom: 30px;
+}
+
+/* Main heading styling */
+.section-title h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Decorative underline for section title */
+.title-underline {
+  width: 54px;
+  height: 5px;
+  background-color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+/* Main text content area */
+.about-text {
+  border-radius: 15px;
+  padding: 30px;
+}
+
+/* Paragraph styling for main content */
+.about-text p {
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Intro paragraph styling - slightly larger */
+.about-text .intro {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Subheading styling */
+.about-text h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 30px 0 15px;
+  color: var(--text-dark);
+}
+
+/* Call to action paragraph styling */
+.about-text .cta {
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Right side brand display area */
+.brand-display {
+  flex: 1;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+/* Logo container in brand display */
+.brand-logo {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+/* Logo image styling */
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Brand title styling */
+.brand-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+/* Responsive styles for tablet devices */
+@media (max-width: 992px) {
+  /* Stack content vertically on smaller screens */
+  .about-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  /* Adjust content widths for smaller screens */
+  .about-content,
+  .brand-display {
+    max-width: 100%;
+  }
+  
+  /* Remove top padding on brand display when stacked */
+  .brand-display {
+    padding-top: 0;
+  }
+}
+
+/* Responsive styles for smaller tablets and large phones */
+@media (max-width: 768px) {
+  /* Stack header elements vertically */
+  header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Reduce navigation spacing */
+  nav ul {
+    gap: 15px;
+  }
+  
+  /* Reduce heading font size */
+  .section-title h1 {
+    font-size: 1.8rem;
+  }
+  
+  /* Reduce content padding */
+  .about-text {
+    padding: 20px;
+  }
+  
+  /* Reduce paragraph font size */
+  .about-text p {
+    font-size: 1rem;
+  }
+  
+  /* Reduce brand title font size */
+  .brand-title {
+    font-size: 2.2rem;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media (max-width: 576px) {
+  /* Stack navigation items vertically */
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Further reduce heading font size */
+  .section-title h1 {
+    font-size: 1.5rem;
+  }
+  
+  /* Reduce subheading font size */
+  .about-text h2 {
+    font-size: 1.3rem;
+  }
+  
+  /* Reduce logo size */
+  .brand-logo {
+    width: 120px;
+    height: 120px;
+  }
+  
+  /* Further reduce brand title font size */
+  .brand-title {
+    font-size: 1.8rem;
+  }
+}

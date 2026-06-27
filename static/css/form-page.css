@@ -1,0 +1,412 @@
+/* 
+  CSS Variables for consistent theming throughout the site
+  These define the color scheme and can be easily changed to update site appearance
+*/
+:root {
+  --primary-color: #2563EB;  /* Primary blue color used for highlights and accents */
+  --primary-dark: #1D4ED8;   /* Darker shade of primary blue for hover states */
+  --text-dark: #111827;      /* Main text color for headings and body text */
+  --text-light: #4B5563;     /* Secondary text color for less emphasis */
+  --white: #FFFFFF;          /* White color for backgrounds and contrast */
+  --light-gray: #F9FAFB;     /* Light gray for subtle backgrounds */
+  --border-light: #E5E7EB;   /* Light border color */
+  --light-blue: #e6f3f8;     /* Light blue for subtle backgrounds */
+  --form-bg: #F2F8FB;        /* Background color for form containers */
+}
+
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main body styling */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Background curved shape using pseudo-element */
+body::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Main container that centers content and sets max width */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Header styles - contains logo and user profile */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* Logo container styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo link styling */
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Logo image size */
+.logo img {
+  height: 60px;
+  width: 60px;
+}
+
+/* Brand name text styling */
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin-left: 10px;
+}
+
+/* Two-tone brand name styling - "Interview" part */
+.brand-interview {
+  color: var(--text-dark);
+}
+
+/* Two-tone brand name styling - "Sense" part */
+.brand-sense {
+  color: var(--primary-color);
+}
+
+/* User profile container in header */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* User avatar container */
+.user-avatar {
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+/* Circular avatar styling */
+.avatar-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+  background-color: rgba(0, 0, 0, 0.01);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Avatar image styling */
+.avatar-circle img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+/* Main content styles */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0 60px;
+}
+
+/* Centered brand logo and name */
+.brand-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+/* Centered brand logo styling */
+.brand-centered img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+/* Main form container styling */
+.form-content {
+  background-color: var(--form-bg);
+  border-radius: 10px;
+  box-shadow: 1px 4px 10px rgba(30, 100, 255, 0.25);
+  width: 100%;
+  max-width: 940px;
+  padding: 40px;
+  position: relative;
+}
+
+/* Form title styling */
+.form-title {
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* Radio buttons group container */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: var(--white);
+  border: 4px solid var(--white);
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 40px;
+}
+
+/* Individual radio option container */
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* Custom radio button input styling */
+.radio-option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #6B7280;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Custom radio button selected state */
+.radio-option input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+/* Radio option label styling */
+.radio-option label {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+/* Media controls container (camera & mic toggles) */
+.media-controls {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+/* Individual media toggle container */
+.media-toggle {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Media toggle icon styling */
+.media-toggle img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Toggle Switch Styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 24px;
+}
+
+/* Hide default checkbox input */
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Custom toggle slider background */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+/* Toggle slider button */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+/* Toggle slider active state background */
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+/* Toggle slider focus state */
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--primary-color);
+}
+
+/* Toggle slider button position when active */
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+/* Note about media requirements */
+.media-note {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 30px;
+}
+
+/* Start button styling */
+.start-button {
+  display: block;
+  background: none;
+  border: none;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Start button image styling */
+.start-button img {
+  width: 248px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Start button hover effect */
+.start-button:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive styles for tablets */
+@media (max-width: 768px) {
+  /* Reduce padding for smaller screens */
+  .form-content {
+    padding: 30px 20px;
+  }
+  
+  /* Reduce padding for radio group */
+  .radio-group {
+    padding: 20px;
+  }
+  
+  /* Reduce gap between media controls */
+  .media-controls {
+    gap: 20px;
+  }
+  
+  /* Reduce start button size */
+  .start-button img {
+    width: 200px;
+    height: 80px;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media (max-width: 576px) {
+  /* Stack header elements vertically */
+  header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Add margin to user profile when stacked */
+  .user-profile {
+    margin-top: 10px;
+  }
+  
+  /* Minimum padding for small screens */
+  .form-content {
+    padding: 20px 15px;
+  }
+  
+  /* Reduce radio group padding further */
+  .radio-group {
+    padding: 15px;
+  }
+  
+  /* Reduce radio option padding */
+  .radio-option {
+    padding: 6px;
+  }
+  
+  /* Stack media controls vertically */
+  .media-controls {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  /* Reduce start button size further */
+  .start-button img {
+    width: 180px;
+    height: 70px;
+  }
+}

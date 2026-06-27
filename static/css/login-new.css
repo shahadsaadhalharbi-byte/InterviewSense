@@ -1,0 +1,314 @@
+/* 
+  CSS Variables for consistent theming throughout the site
+  These define the color scheme and can be easily changed to update site appearance
+*/
+:root {
+  --primary-color: #2563EB;  /* Primary blue color used for highlights and accents */
+  --primary-dark: #1D4ED8;   /* Darker shade of primary blue for hover states */
+  --text-dark: #111827;      /* Main text color for headings and body text */
+  --text-light: #4B5563;     /* Secondary text color for less emphasis */
+  --white: #FFFFFF;          /* White color for backgrounds and contrast */
+  --light-gray: #F9FAFB;     /* Light gray for subtle backgrounds */
+  --border-light: #E5E7EB;   /* Light border color */
+  --light-blue: #e6f3f8;     /* Light blue for subtle backgrounds */
+}
+
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main body styling */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-image: url('../img/rectangle-above.png');
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1001;
+}
+
+/* Main container that centers content and sets max width */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Header styles - contains logo and navigation */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* Logo container styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo link styling */
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Logo image size */
+.logo img {
+  height: 60px;
+  width: 60px;
+}
+
+/* Brand name text styling */
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin-left: 10px;
+}
+
+/* Two-tone brand name styling - "Interview" part */
+.brand-interview {
+  color: var(--text-dark);
+}
+
+/* Two-tone brand name styling - "Sense" part */
+.brand-sense {
+  color: var(--primary-color);
+}
+
+/* Button base styling */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* Outline button style for secondary actions */
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+/* Outline button hover effect */
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+/* Primary button style for main actions */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+}
+
+/* Primary button hover effect */
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Login page main container - 2 column layout */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+/* Login form container - left column */
+.login-form {
+  flex: 1;
+  max-width: 500px;
+}
+
+/* Welcome text heading styling */
+.welcome-text h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Welcome text paragraph styling */
+.welcome-text p {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  margin-bottom: 30px;
+}
+
+/* Form field group styling */
+.form-group {
+  margin-bottom: 25px;
+}
+
+/* Form field label styling */
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+/* Form input field styling */
+.form-group input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* Password field container for positioning the toggle button */
+.password-field {
+  position: relative;
+}
+
+/* Password visibility toggle button */
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  padding: 10px;
+
+}
+
+
+/* Sign up link container below the form */
+.signup-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Sign up link text styling */
+.signup-link p {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+/* Sign up link styling */
+.signup-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* Bold text within sign up link */
+.signup-link a strong {
+  text-decoration: underline;
+  color: var(--text-dark);
+}
+
+/* Login image container - right column */
+.login-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login image styling */
+.login-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive styles for tablets */
+@media (max-width: 992px) {
+  /* Stack form and image vertically on smaller screens */
+  .login-container {
+    flex-direction: column;
+  }
+  
+  /* Make the form full width when stacked */
+  .login-form {
+    max-width: 100%;
+    order: 2; /* Show form after the image */
+  }
+  
+  /* Adjust image container when stacked */
+  .login-image {
+    order: 1; /* Show image before the form */
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  /* Ensure image fits within container */
+  .login-image img {
+    max-width: 100%;
+  }
+}
+
+/* Responsive styles for smaller tablets */
+@media (max-width: 768px) {
+  /* Reduce heading size on smaller screens */
+  .welcome-text h1 {
+    font-size: 2rem;
+  }
+  
+  /* Reduce paragraph size on smaller screens */
+  .welcome-text p {
+    font-size: 1rem;
+  }
+  
+  /* Slightly reduce image size */
+  .login-image img {
+    max-width: 90%;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media (max-width: 576px) {
+  /* Stack header elements vertically */
+  header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Further reduce heading size on mobile */
+  .welcome-text h1 {
+    font-size: 1.8rem;
+  }
+  
+  /* Reduce input padding on mobile */
+  .form-group input {
+    padding: 12px;
+  }
+  
+  /* Reduce button padding on mobile */
+  .btn-primary {
+    padding: 12px;
+  }
+}

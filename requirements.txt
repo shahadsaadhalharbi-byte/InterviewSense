@@ -1,0 +1,12 @@
+Flask
+python-dotenv
+openai
+numpy
+scikit-learn
+deepface
+opencv-python
+assemblyai
+sounddevice
+scipy
+sentence-transformers
+torch

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Interview Results - InterviewSense</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/score-page.css') }}">
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    .warning-message {
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+
+    
+  </style>
+</head>
+
+
+<body>
+  <!-- Main container for all content -->
+  <div class="container">
+    <!-- Header with logo only -->
+    <!-- Header with logo and authentication options -->
+    <header>
+      <div class="header-container">
+        <!-- Logo with link to homepage -->
+        <div class="logo">
+          <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="InterviewSense Logo">
+            <div class="brand-name">
+              <span class="brand-interview">Interview</span><span class="brand-sense">Sense</span>
+            </div>
+          </a>
+        </div>
+
+      <!-- Authentication buttons -->
+      <div class="auth-buttons">
+        <!-- User profile with dropdown when logged in -->
+        <div class="user-avatar">
+          <div class="user-avatar" onclick="toggleDropdown()">
+            <div class="avatar-circle">
+              <img src="{{ url_for('static', filename='img/user--2--1@2x.png') }}" alt="User Avatar">
+            </div>
+          </div>
+          <!-- Dropdown menu -->
+          <div id="profileDropdown" class="dropdown-menu">
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('get_started') }}">Start Interview</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+          </div>
+        </div>
+         <div class="nav-links">
+          <ul>
+            <li><a href="{{ url_for('home') }}#how-it-works">How it works</a></li>
+            <li><a href="{{ url_for('about') }}">About us</a></li> 
+            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="results-container">
+      <div class="card">
+        <div class="results-section">
+
+          <!-- Updated Facial Expression Scores section -->
+          <h2 class="section-title"><strong>Facial Expression Scores</strong></h2>
+          <div class="expressions-grid">
+            {% if emotions and emotions.camera_disabled %}
+            <p class="no-data-message"><strong>Camera was disabled during this interview.
+                Enable your camera in the settings for facial expression analysis.</strong></p>
+
+            {% elif emotions and emotions.error == "No face detected" %}
+            <p class="no-data-message"><strong>No face was detected during the interview (0% detection rate).
+                Please ensure your face is clearly visible to the camera throughout the interview.</strong></p>
+
+            {% elif emotions and emotions.error == "Insufficient face detection" %}
+            <p class="no-data-message"><strong>Face was only detected in {{ emotions.face_detection_rate }}% of frames.
+                Please ensure your face is clearly visible to the camera throughout the interview.</strong></p>
+
+            {% elif emotions and "face_detection_rate" in emotions %}
+            {% if emotions.face_detection_rate < 50 %} <div class="warning-message">
+              <p><strong>⚠️ Warning: Your face was only detected in {{ emotions.face_detection_rate }}% of frames.
+                  For better results, please ensure your face is clearly visible throughout the interview.</strong></p>
+          </div>
+          {% endif %}
+
+          {% for emotion, emo_score in emotions|dictsort(by='value', reverse=True) %}
+          {% if emo_score > 0 and emotion != "face_detection_rate" %}
+          <div class="expression-item">
+            <strong>{{ emotion.title() }}</strong>
+            <span class="score-value"><strong>{{ "%.f"|format(emo_score) }}%</strong></span>
+          </div>
+          {% endif %}
+          {% endfor %}
+
+          {% else %}
+          <p class="no-data-message"><strong>No facial emotion data was collected.
+              This could be because no face was detected throughout the interview or camera was disabled.</strong></p>
+          {% endif %}
+        </div>
+
+
+        <!-- Add some CSS styling for the warning message -->
+
+
+        <!-- Voice Answer Score -->
+        <h2 class="section-title"><strong>Answer Score</strong></h2>
+        <p class="score-feedback"><strong>You achieved a score of {{ similarity_score | round(2) }}% based on your
+            spoken responses.</strong></p>
+
+      </div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="home-buttons">
+    <a href="{{ url_for('home') }}" class="btn btn-primary">
+      <img src="{{ url_for('static', filename='img/icon-4.svg') }}" alt="Arrow Icon">
+      Go back to the homepage
+    </a>
+  </div>
+
+  </main>
+
+  <!-- JavaScript for accordion functionality -->
+  <script>
+
+    // Add this to your existing script or in a new script tag
+    function toggleDropdown() {
+      document.getElementById("profileDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown when clicking outside
+    window.onclick = function (event) {
+      if (!event.target.matches('.user-avatar') && !event.target.matches('.user-avatar *')) {
+        var dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
