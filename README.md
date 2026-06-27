@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/interviewsense.png" alt="InterviewSense" width="100%" />
+  <img src="assets/interviewsense.png" alt="InterviewSense Cover" width="100%" />
 </p>
 
 # InterviewSense – Automatic Evaluation of Interview Applicant Performance
@@ -11,8 +11,6 @@ The project was developed as a graduation project under the title:
 > **Automatic Evaluation of Interview Applicant Performance using Different Modalities**
 
 Instead of only asking interview questions, InterviewSense simulates an interview session, records spoken answers, analyzes answer relevance, observes facial emotions, and presents performance scores that help applicants understand their strengths and weaknesses.
-
-> This repository is a sanitized portfolio version. API keys, local database files, temporary audio files, and real user records are not included.
 
 ---
 
@@ -102,6 +100,36 @@ The AI layer supports the core intelligence of the system:
 
 ---
 
+## System Workflow
+
+```text
+Applicant Login / Signup
+        ↓
+Select Major
+        ↓
+Enable Microphone and Optional Camera
+        ↓
+Generate Seven Interview Questions
+        ↓
+Applicant Answers Questions by Voice
+        ↓
+Convert Spoken Answers to Text
+        ↓
+Generate Model Answers
+        ↓
+Compare Applicant Answers with Model Answers
+        ↓
+Calculate Textual Score
+        ↓
+Analyze Facial Emotions from Frames
+        ↓
+Calculate Facial Emotion Summary
+        ↓
+Display Final Scores
+```
+
+---
+
 ## Key Features
 
 - User signup and login.
@@ -117,6 +145,37 @@ The AI layer supports the core intelligence of the system:
 - Final score page for textual and facial performance.
 - Contact form for user messages.
 - Responsive web interface designed from Figma prototypes.
+
+---
+
+## Database Design
+
+InterviewSense uses a lightweight SQLite database for the academic prototype and portfolio version.
+
+The database is used to store registered users and contact messages. The local database file is excluded from the repository to avoid publishing personal data.
+
+### Users Table
+
+| Field | Purpose |
+|---|---|
+| `id` | Unique identifier for each user |
+| `name` | User full name |
+| `email` | User email address |
+| `password` | User password in the original academic prototype |
+| `major` | Selected major or field |
+
+### Contacts Table
+
+| Field | Purpose |
+|---|---|
+| `id` | Unique identifier for each message |
+| `name` | Sender name |
+| `email` | Sender email address |
+| `message` | User message submitted through the contact form |
+
+### Database Note
+
+The repository does **not** include the local `database.db` file because it may contain user records. Instead, the database schema is represented in `init_db.py`.
 
 ---
 
@@ -212,6 +271,50 @@ The academic evaluation phase referenced and used several datasets related to sp
 
 ---
 
+## Project Preview
+
+<p align="center">
+  <img src="assets/interviewsense.png" alt="InterviewSense UI Preview" width="100%" />
+</p>
+
+---
+
+## Academic Poster
+
+The poster summarizes the project motivation, objectives, architecture, workflow, experimental results, tools, and UI design.
+
+<p align="center">
+  <img src="assets/interviewsense-poster.png" alt="InterviewSense Academic Poster" width="100%" />
+</p>
+
+---
+
+## Repository Notes
+
+This repository is prepared as a clean portfolio version of the project. The following items are intentionally excluded:
+
+- API keys
+- Local `.env` file
+- Local SQLite database file
+- Temporary audio files
+- Real user records
+- Personal or sensitive data
+
+The purpose of this repository is to present the project idea, system design, AI components, database structure, and academic evaluation results in a safe and professional format.
+
+---
+
+## Limitations
+
+The current version has the following limitations:
+
+- The system currently supports English answers only.
+- The interview domain focuses mainly on computer science and engineering fields.
+- Applicant score history is not stored for long-term progress tracking.
+- The portfolio version is prepared for demonstration and documentation, not production deployment.
+
+---
+
 ## Future Work
 
 Planned improvements include:
@@ -226,3 +329,8 @@ Planned improvements include:
 
 ---
 
+## Author
+
+**Shahad Alharbi**  
+Computer Science Graduate  
+Interested in AI Engineering, Data Analytics, and Backend Development.
